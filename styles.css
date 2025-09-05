@@ -1,0 +1,192 @@
+:root {
+    --primary-bg: #0a0f18;
+    --secondary-bg: #101827;
+    --accent-color: #00ff9c;
+    --accent-color-rgb: 0, 255, 156;
+    --text-color: #cdd6f4;
+    --text-secondary-color: #a6adc8;
+    --border-color: #313a50;
+    --font-primary: 'Roboto', sans-serif;
+    --font-title: 'VT323', monospace;
+}
+
+body {
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+#matrix-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.13;
+}
+
+.scanline-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background-image: linear-gradient(transparent 50%, rgba(0, 25, 10, 0.08) 50%);
+    background-size: 100% 2px;
+    z-index: 1;
+    animation: scanlines 30s linear infinite;
+}
+@keyframes scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100vh; }
+}
+
+header {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    z-index: 2;
+    position: relative;
+}
+
+.title-font {
+    font-family: var(--font-title);
+    color: var(--accent-color);
+    font-size: 2.8rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(var(--accent-color-rgb), 0.5), 0 0 15px rgba(var(--accent-color-rgb), 0.3);
+}
+
+.hacker-terminal {
+    font-family: var(--font-title);
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    margin-top: 10px;
+    text-shadow: 0 0 5px rgba(var(--accent-color-rgb), 0.4);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+    z-index: 2;
+    position: relative;
+}
+
+.profile-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 40px;
+}
+
+.profile-card {
+    background-color: var(--secondary-bg);
+    border: 1.5px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px 24px 24px 24px;
+    width: 320px;
+    min-height: 210px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s cubic-bezier(.25,.8,.25,1);
+    position: relative;
+    cursor: pointer;
+    z-index: 2;
+    overflow: hidden;
+    animation: fadeIn 0.7s cubic-bezier(.25,.8,.25,1);
+}
+
+.profile-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(var(--accent-color-rgb), 0.18), 0 0 20px rgba(var(--accent-color-rgb), 0.13);
+    border-color: var(--accent-color);
+}
+
+.profile-title {
+    font-family: var(--font-title);
+    color: var(--accent-color);
+    font-size: 2rem;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(var(--accent-color-rgb), 0.5);
+    text-decoration: underline dotted;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.profile-title:hover {
+    color: #fff;
+    text-shadow: 0 0 8px #00ff9c, 0 0 15px #00ff9c;
+}
+
+.profile-description {
+    color: var(--text-secondary-color);
+    font-size: 1.08rem;
+    margin-bottom: 22px;
+    min-height: 48px;
+    font-family: var(--font-primary);
+}
+
+.profile-link {
+    display: inline-block;
+    padding: 10px 22px;
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(var(--accent-color-rgb), 0.15);
+    transition: background-color 0.3s, transform 0.3s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.profile-link:hover {
+    background-color: #00e68a;
+    color: var(--primary-bg);
+    transform: scale(1.07);
+    box-shadow: 0 4px 16px rgba(var(--accent-color-rgb), 0.25);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Typing animation */
+.typing-animate {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid var(--accent-color);
+    animation: typing 2.2s steps(40, end), blink-caret 0.7s step-end infinite;
+}
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--accent-color); }
+}
+
+footer {
+    text-align: center;
+    color: var(--text-secondary-color);
+    font-size: 1rem;
+    margin-bottom: 24px;
+    z-index: 2;
+    position: relative;
+    font-family: sans-serif;
+}
